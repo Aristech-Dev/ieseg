@@ -1,6 +1,5 @@
-String formatNumber(int n) => n
-    .toString()
-    .replaceAllMapped(RegExp(r'\B(?=(\d{3})+(?!\d))'), (_) => ' ');
+String formatNumber(int n) =>
+    n.toString().replaceAllMapped(RegExp(r'\B(?=(\d{3})+(?!\d))'), (_) => ' ');
 
 class Vehicle {
   const Vehicle({
@@ -45,9 +44,12 @@ class Vehicle {
         'd\'un toit panoramique et des aides à la conduite. Idéale pour la '
         'ville comme pour la route. (Annonce fictive de démonstration.)',
     photos: [
-      'assets/photos/car_1.svg',
-      'assets/photos/car_2.svg',
-      'assets/photos/car_3.svg',
+      //      'assets/photos/car_1.svg',
+      //      'assets/photos/car_2.svg',
+      //      'assets/photos/car_3.svg',
+      'assets/photos/peugeot1.jpeg',
+      'assets/photos/peugeot2.webp',
+      'assets/photos/peugeot3.webp',
     ],
   );
 }
