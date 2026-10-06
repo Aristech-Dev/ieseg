@@ -35,4 +35,6 @@ Dépôt GitHub → **Settings → Pages → Source : GitHub Actions**. Chaque pu
 
 ## Remplacer les visuels
 
-Les logos de marques (`assets/brands/`) et les visuels véhicule (`assets/photos/`) sont des illustrations SVG. Pour utiliser de vraies photos, remplacer les fichiers et mettre à jour `Vehicle.demo.photos` dans `lib/feed/vehicle.dart`.
+Les logos de marques (`assets/brands/`) et les visuels véhicule (`assets/photos/`) sont des illustrations SVG. Pour utiliser de vraies photos, déposer les fichiers dans `assets/photos/` et mettre à jour `Vehicle.demo.photos` dans `lib/feed/vehicle.dart`.
+
+Formats supportés : **SVG, JPEG, PNG, WebP, GIF**. L'**AVIF n'est pas supporté** par le décodeur d'images de Flutter web (un repère « image cassée » s'affiche à la place). Conversion rapide en WebP : `magick photo.avif -quality 85 photo.webp`.

@@ -40,7 +40,7 @@ class _PhotoCarouselState extends State<PhotoCarousel> {
               itemCount: widget.photos.length,
               onPageChanged: (i) => setState(() => _index = i),
               itemBuilder: (context, i) =>
-                  SvgPicture.asset(widget.photos[i], fit: BoxFit.cover),
+                  _PhotoView(widget.photos[i]),
             ),
           ),
         ),
@@ -67,6 +67,29 @@ class _PhotoCarouselState extends State<PhotoCarousel> {
           ),
         ),
       ],
+    );
+  }
+}
+
+/// Affiche un SVG via flutter_svg, toute autre extension (jpg, png, webp,
+/// avif...) via le décodeur d'images de Flutter.
+class _PhotoView extends StatelessWidget {
+  const _PhotoView(this.path);
+
+  final String path;
+
+  bool get _isSvg => path.toLowerCase().endsWith('.svg');
+
+  @override
+  Widget build(BuildContext context) {
+    if (_isSvg) return SvgPicture.asset(path, fit: BoxFit.cover);
+    return Image.asset(
+      path,
+      fit: BoxFit.cover,
+      errorBuilder: (context, error, stackTrace) => ColoredBox(
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+        child: const Center(child: Icon(Icons.broken_image_outlined, size: 48)),
+      ),
     );
   }
 }
