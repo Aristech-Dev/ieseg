@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -26,12 +27,21 @@ class _PhotoCarouselState extends State<PhotoCarousel> {
       children: [
         AspectRatio(
           aspectRatio: 16 / 10,
-          child: PageView.builder(
-            controller: _controller,
-            itemCount: widget.photos.length,
-            onPageChanged: (i) => setState(() => _index = i),
-            itemBuilder: (context, i) =>
-                SvgPicture.asset(widget.photos[i], fit: BoxFit.cover),
+          child: ScrollConfiguration(
+            behavior: ScrollConfiguration.of(context).copyWith(
+              dragDevices: {
+                PointerDeviceKind.touch,
+                PointerDeviceKind.mouse,
+                PointerDeviceKind.trackpad,
+              },
+            ),
+            child: PageView.builder(
+              controller: _controller,
+              itemCount: widget.photos.length,
+              onPageChanged: (i) => setState(() => _index = i),
+              itemBuilder: (context, i) =>
+                  SvgPicture.asset(widget.photos[i], fit: BoxFit.cover),
+            ),
           ),
         ),
         Positioned(

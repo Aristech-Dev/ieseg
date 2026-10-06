@@ -2,6 +2,7 @@ import 'package:autoscope/feed/feed_page.dart';
 import 'package:autoscope/feed/photo_carousel.dart';
 import 'package:autoscope/feed/vehicle.dart';
 import 'package:autoscope/onboarding/search_criteria.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
@@ -48,6 +49,18 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byKey(const Key('dot-1-active')), findsOneWidget);
     expect(find.byKey(const Key('dot-0')), findsOneWidget);
+  });
+
+  testWidgets('le carousel se fait défiler à la souris (ordinateur)', (tester) async {
+    await _pump(tester);
+    final gesture = await tester.startGesture(
+      tester.getCenter(find.byType(PageView)),
+      kind: PointerDeviceKind.mouse,
+    );
+    await gesture.moveBy(const Offset(-300, 0));
+    await gesture.up();
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('dot-1-active')), findsOneWidget);
   });
 
   testWidgets('l\'icône filtre revient à l\'OnBoarding en conservant les critères', (tester) async {
